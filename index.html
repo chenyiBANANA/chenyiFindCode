@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>chenyi終極密碼</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="stylesheets/code.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-5">
+            <h1 class="col text-center">
+                終極密碼
+            </h1>
+        </div>
+        <div class="row">
+            <h2 class="col text-center" id="result">
+                0~100
+            </h2>
+        </div>
+
+
+        <div class="input-group mt-5">
+            <input type="text" id="input" class="form-control text-right" aria-describedby="input">
+
+        </div>
+
+        <div class="row mt-5">
+            <button class="col text-center input-pad btn-lg">1</button>
+            <button class="col ml-3 text-center input-pad btn-lg">2</button>
+            <button class="col ml-3 text-center input-pad btn-lg">3</button>
+        </div>
+        <div class="row mt-3">
+            <button class="col text-center input-pad btn-lg">4</button>
+            <button class="col ml-3 text-center input-pad btn-lg">5</button>
+            <button class="col ml-3 text-center input-pad btn-lg">6</button>
+        </div>
+        <div class="row mt-3">
+            <button class="col text-center input-pad btn-lg">7</button>
+            <button class="col ml-3 text-center input-pad btn-lg">8</button>
+            <button class="col ml-3 text-center input-pad btn-lg">9</button>
+        </div>
+        <div class="row mt-3">
+            <button class="col text-center btn-lg" id="clearaaa" onclick="clearaaa()">Clear</button>
+            <button class="col ml-3 text-center input-pad btn-lg">0</button>
+            <button class="col ml-3 text-center btn-lg" id="enter" onclick="enter()">Enter</button>
+
+        </div>
+        <div class="row mt-3">
+            <button class="col text-center btn-lg" id="again" onclick="again()">重新</button>
+
+        </div>
+
+
+
+
+    </div>
+
+    <script>
+
+
+
+        var inputButtons = document.getElementsByClassName("input-pad");
+        for (var i = 0; i < inputButtons.length; i++) {
+            inputButtons[i].onclick = inputButton;
+        }
+
+        function inputButton() {
+            console.info(this.innerHTML);
+            var input = document.getElementById("input");
+            var text = this.innerHTML;
+            input.value += text;
+        }
+
+        max = 100;
+        min = 0;
+        var ram = Math.floor(Math.random() * (max - min + 1) + min);
+        var input = document.getElementById("input");
+        var result = document.getElementById("result");
+        console.info(ram);
+        function again() {
+            max = 100;
+            min = 0;
+            ram = Math.floor(Math.random() * (max - min + 1) + min);
+            console.info(ram);
+            result.innerText = "0~100";
+        }
+
+        function clearaaa() {
+            input.value = "";
+        }
+
+        function enter() {
+            var thisround = input.value;
+            var thisround2 = thisround.substr(0,1);
+            console.info(thisround2);
+            
+            if(thisround.length != 2 || thisround2 == "0") {
+                alert("輸入錯誤 傻屌~");
+                input.value = "";
+            }
+            else {
+                if (ram == input.value) {
+                    alert("過關");
+                }
+                if (input.value > ram) {
+                    if (input.value < max) {
+                        max = input.value;
+                    }
+                }
+                if (input.value < ram) {
+                    if (input.value > min) {
+                        min = input.value;
+                    }
+                }
+                result.innerText = min + "~" + max;
+                input.value = "";
+            }
+
+        }
+
+        
+    </script>
+</body>
+
+</html>
